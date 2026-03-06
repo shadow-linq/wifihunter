@@ -4,8 +4,8 @@ WiFi Vulnerability Scanner
 Analyzes one or more pcap files for common WiFi security vulnerabilities.
 
 Usage:
-    python wifi_vuln_scanner.py capture.pcap [capture2.pcap ...] --ssids SSID1 SSID2
-    python wifi_vuln_scanner.py *.pcap --all-ssids
+    python wifihunter.py capture.pcap [capture2.pcap ...] --ssids SSID1 SSID2
+    python wifihunter.py *.pcap --all-ssids
 
 Requirements:
     pip install scapy
@@ -767,6 +767,7 @@ def print_findings(all_findings: dict, ap_map: dict, use_color: bool = True):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def main():
+    global DEAUTH_FLOOD_THRESHOLD
     parser = argparse.ArgumentParser(
         description="WiFi Vulnerability Scanner — analyze one or more pcap files",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -806,7 +807,6 @@ Examples:
         parser.print_help()
         sys.exit(1)
 
-    global DEAUTH_FLOOD_THRESHOLD
     DEAUTH_FLOOD_THRESHOLD = args.deauth_threshold
 
     aps: dict = {}
